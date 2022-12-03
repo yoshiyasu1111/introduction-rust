@@ -1,0 +1,26 @@
+site_name: Rust入門
+
+theme:
+  name: material
+  locale: ja
+  features:
+    - toc.integrate
+    - content.code.annotate
+
+nav:
+  - 序文: index.md
+  - データ型: data_type.md
+
+markdown_extensions:
+  - admonition
+  - fontawesome_markdown
+  - codehilite
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+
+extra_css:
+    - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
