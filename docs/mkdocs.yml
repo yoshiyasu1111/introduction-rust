@@ -6,6 +6,8 @@ theme:
   features:
     - toc.integrate
     - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
 
 nav:
   - 序文: index.md
@@ -24,6 +26,9 @@ markdown_extensions:
 
 extra_css:
     - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+
+repo_url: https://github.com/yoshiyasu1111/introduction-rust
+repo_name: yoshiyasu1111/introduction-rust
 
 extra:
   analytics:
