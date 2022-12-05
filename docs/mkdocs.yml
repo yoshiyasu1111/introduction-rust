@@ -24,3 +24,8 @@ markdown_extensions:
 
 extra_css:
     - "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+
+extra:
+  analytics:
+    provider: google
+    property: G-Q10LRY3ME7
