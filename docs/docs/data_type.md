@@ -128,6 +128,110 @@ fn main() {
 39,92,10
 ```
 
+## 整数型に定義されたメソッド
+
+### チェック付き演算
+
+演算した結果をOption型として返します。オーバーフローが発生しなければ演算結果をvとしてSome(v)を返し、発生すればNoneを返します。
+
+- checked_add
+
+=== "u8"
+
+    ```rust
+    // u8::MAX - 1に1を足すとu8::MAXとなりオーバーフローは発生しないのでSome(u8::MAX)が返ります。
+    assert_eq!((u8::MAX - 1).checked_add(1), Some(u8::MAX));
+    // u8::MAX - 1に2を足すとu8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u8::MAX - 1).checked_add(2), None);
+    ```
+
+=== "u16"
+
+    ```rust
+    // u16::MAX - 1に1を足すとu16::MAXとなりオーバーフローは発生しないのでSome(u16::MAX)が返ります。
+    assert_eq!((u16::MAX - 1).checked_add(1), Some(u16::MAX));
+    // u16::MAX - 1に2を足すとu16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u16::MAX - 1).checked_add(2), None);
+    ```
+
+=== "u32"
+
+    ```rust
+    // u32::MAX - 1に1を足すとu32::MAXとなりオーバーフローは発生しないのでSome(u32::MAX)が返ります。
+    assert_eq!((u32::MAX - 1).checked_add(1), Some(u32::MAX));
+    // u32::MAX - 1に2を足すとu32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u32::MAX - 1).checked_add(2), None);
+    ```
+
+=== "u64"
+
+    ```rust
+    // u64::MAX - 1に1を足すとu64::MAXとなりオーバーフローは発生しないのでSome(u64::MAX)が返ります。
+    assert_eq!((u64::MAX - 1).checked_add(1), Some(u64::MAX));
+    // u64::MAX - 1に2を足すとu64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u64::MAX - 1).checked_add(2), None);
+    ```
+
+=== "u128"
+
+    ```rust
+    // u128::MAX - 1に1を足すとu128::MAXとなりオーバーフローは発生しないのでSome(u128::MAX)が返ります。
+    assert_eq!((u128::MAX - 1).checked_add(1), Some(u128::MAX));
+    // u128::MAX - 1に2を足すとu128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u128::MAX - 1).checked_add(2), None);
+    ```
+
+=== "i8"
+
+    ```rust
+    // i8::MAX - 1に1を足すとi8::MAXとなりオーバーフローは発生しないのでSome(i8::MAX)が返ります。
+    assert_eq!((i8::MAX - 1).checked_add(1), Some(i8::MAX));
+    // i8::MAX - 1に2を足すとi8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i8::MAX - 1).checked_add(2), None);
+    ```
+
+=== "i16"
+
+    ```rust
+    // i16::MAX - 1に1を足すとi16::MAXとなりオーバーフローは発生しないのでSome(i16::MAX)が返ります。
+    assert_eq!((i16::MAX - 1).checked_add(1), Some(i16::MAX));
+    // i16::MAX - 1に2を足すとi16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i16::MAX - 1).checked_add(2), None);
+    ```
+
+=== "i32"
+
+    ```rust
+    // i32::MAX - 1に1を足すとi32::MAXとなりオーバーフローは発生しないのでSome(i32::MAX)が返ります。
+    assert_eq!((i32::MAX - 1).checked_add(1), Some(i32::MAX));
+    // i32::MAX - 1に2を足すとi32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i32::MAX - 1).checked_add(2), None);
+    ```
+
+=== "i64"
+
+    ```rust
+    // i64::MAX - 1に1を足すとi64::MAXとなりオーバーフローは発生しないのでSome(i64::MAX)が返ります。
+    assert_eq!((i64::MAX - 1).checked_add(1), Some(i64::MAX));
+    // i64::MAX - 1に2を足すとi64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i64::MAX - 1).checked_add(2), None);
+    ```
+
+=== "i128"
+
+    ```rust
+    // i128::MAX - 1に1を足すとi128::MAXとなりオーバーフローは発生しないのでSome(i128::MAX)が返ります。
+    assert_eq!((i128::MAX - 1).checked_add(1), Some(i128::MAX));
+    // i128::MAX - 1に2を足すとi128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i128::MAX - 1).checked_add(2), None);
+    ```
+
+### ラップ演算
+
+### 飽和演算
+
+### オーバーフロー演算
+
 ## 浮動小数点型
 
 IEEE754規格準拠の単精度と倍精度の浮動小数点数をサポートしています。f32が単精度、f64が倍精度に対応しています。
