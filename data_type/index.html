@@ -312,6 +312,47 @@
       
         <li class="md-nav__item">
   <a href="#_7" class="md-nav__link">
+    整数型に定義されたメソッド
+  </a>
+  
+    <nav class="md-nav" aria-label="整数型に定義されたメソッド">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    チェック付き演算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    ラップ演算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    飽和演算
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    オーバーフロー演算
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
     浮動小数点型
   </a>
   
@@ -635,7 +676,670 @@
 <a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="m">65</span>,66,67
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="m">39</span>,92,10
 </code></pre></div>
-<h2 id="_7">浮動小数点型</h2>
+<h2 id="_7">整数型に定義されたメソッド</h2>
+<h3 id="_8">チェック付き演算</h3>
+<p>演算した結果をOption型として返します。オーバーフローが発生しなければ演算結果をvとしてSome(v)を返し、発生すればNoneを返します。</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_add</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:10"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><input id="__tabbed_1_3" name="__tabbed_1" type="radio" /><input id="__tabbed_1_4" name="__tabbed_1" type="radio" /><input id="__tabbed_1_5" name="__tabbed_1" type="radio" /><input id="__tabbed_1_6" name="__tabbed_1" type="radio" /><input id="__tabbed_1_7" name="__tabbed_1" type="radio" /><input id="__tabbed_1_8" name="__tabbed_1" type="radio" /><input id="__tabbed_1_9" name="__tabbed_1" type="radio" /><input id="__tabbed_1_10" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">u8</label><label for="__tabbed_1_2">u16</label><label for="__tabbed_1_3">u32</label><label for="__tabbed_1_4">u64</label><label for="__tabbed_1_5">u128</label><label for="__tabbed_1_6">i8</label><label for="__tabbed_1_7">i16</label><label for="__tabbed_1_8">i32</label><label for="__tabbed_1_9">i64</label><label for="__tabbed_1_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// u8::MAX - 1に1を足すとu8::MAXとなりオーバーフローは発生しないのでSome(u8::MAX)が返ります。</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1">// u8::MAX - 1に2を足すとu8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">// u16::MAX - 1に1を足すとu16::MAXとなりオーバーフローは発生しないのでSome(u16::MAX)が返ります。</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="c1">// u16::MAX - 1に2を足すとu16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1">// u32::MAX - 1に1を足すとu32::MAXとなりオーバーフローは発生しないのでSome(u32::MAX)が返ります。</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="c1">// u32::MAX - 1に2を足すとu32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1">// u64::MAX - 1に1を足すとu64::MAXとなりオーバーフローは発生しないのでSome(u64::MAX)が返ります。</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="c1">// u64::MAX - 1に2を足すとu64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// u128::MAX - 1に1を足すとu128::MAXとなりオーバーフローは発生しないのでSome(u128::MAX)が返ります。</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="c1">// u128::MAX - 1に2を足すとu128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">// i8::MAX - 1に1を足すとi8::MAXとなりオーバーフローは発生しないのでSome(i8::MAX)が返ります。</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1">// i8::MAX - 1に2を足すとi8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">// i16::MAX - 1に1を足すとi16::MAXとなりオーバーフローは発生しないのでSome(i16::MAX)が返ります。</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="c1">// i16::MAX - 1に2を足すとi16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">// i32::MAX - 1に1を足すとi32::MAXとなりオーバーフローは発生しないのでSome(i32::MAX)が返ります。</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">// i32::MAX - 1に2を足すとi32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">// i64::MAX - 1に1を足すとi64::MAXとなりオーバーフローは発生しないのでSome(i64::MAX)が返ります。</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="c1">// i64::MAX - 1に2を足すとi64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">// i128::MAX - 1に1を足すとi128::MAXとなりオーバーフローは発生しないのでSome(i128::MAX)が返ります。</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="c1">// i128::MAX - 1に2を足すとi128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_add</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_sub</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:10"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><input id="__tabbed_2_3" name="__tabbed_2" type="radio" /><input id="__tabbed_2_4" name="__tabbed_2" type="radio" /><input id="__tabbed_2_5" name="__tabbed_2" type="radio" /><input id="__tabbed_2_6" name="__tabbed_2" type="radio" /><input id="__tabbed_2_7" name="__tabbed_2" type="radio" /><input id="__tabbed_2_8" name="__tabbed_2" type="radio" /><input id="__tabbed_2_9" name="__tabbed_2" type="radio" /><input id="__tabbed_2_10" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">u8</label><label for="__tabbed_2_2">u16</label><label for="__tabbed_2_3">u32</label><label for="__tabbed_2_4">u64</label><label for="__tabbed_2_5">u128</label><label for="__tabbed_2_6">i8</label><label for="__tabbed_2_7">i16</label><label for="__tabbed_2_8">i32</label><label for="__tabbed_2_9">i64</label><label for="__tabbed_2_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">// u8::MIN - 1から1を引くとu8::MINとなりオーバーフローは発生しないのでSome(u8::MIN)が返ります。</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u8</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="c1">// u8::MIN - 1から2を引くとu8::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">// u16::MIN - 1から1を引くとu16::MINとなりオーバーフローは発生しないのでSome(u16::MIN)が返ります。</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u16</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1">// u16::MIN - 1から2を引くとu16::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">// u32::MIN - 1から1を引くとu32::MINとなりオーバーフローは発生しないのでSome(u32::MIN)が返ります。</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u32</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="c1">// u32::MIN - 1から2を引くとu32::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">// u64::MIN - 1から1を引くとu64::MINとなりオーバーフローは発生しないのでSome(u64::MIN)が返ります。</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u64</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1">// u64::MIN - 1から2を引くとu64::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">// u128::MIN - 1から1を引くとu128::MINとなりオーバーフローは発生しないのでSome(u128::MIN)が返ります。</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u128</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="c1">// u128::MIN - 1から2を引くとu128::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1">// i8::MIN - 1から1を引くとi8::MINとなりオーバーフローは発生しないのでSome(i8::MIN)が返ります。</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i8</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="c1">// i8::MIN - 1から2を引くとi8::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1">// i16::MIN - 1から1を引くとi16::MINとなりオーバーフローは発生しないのでSome(i16::MIN)が返ります。</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i16</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1">// i16::MIN - 1から2を引くとi16::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">// i32::MIN - 1から1を引くとi32::MINとなりオーバーフローは発生しないのでSome(i32::MIN)が返ります。</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i32</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">// i32::MIN - 1から2を引くとi32::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1">// i64::MIN - 1から1を引くとi64::MINとなりオーバーフローは発生しないのでSome(i64::MIN)が返ります。</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i64</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1">// i64::MIN - 1から2を引くとi64::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">// i128::MIN - 1から1を引くとi128::MINとなりオーバーフローは発生しないのでSome(i128::MIN)が返ります。</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i128</span>::<span class="n">MIN</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="c1">// i128::MIN - 1から2を引くとi128::MIN - 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">checked_sub</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_mul</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:10"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><input id="__tabbed_3_4" name="__tabbed_3" type="radio" /><input id="__tabbed_3_5" name="__tabbed_3" type="radio" /><input id="__tabbed_3_6" name="__tabbed_3" type="radio" /><input id="__tabbed_3_7" name="__tabbed_3" type="radio" /><input id="__tabbed_3_8" name="__tabbed_3" type="radio" /><input id="__tabbed_3_9" name="__tabbed_3" type="radio" /><input id="__tabbed_3_10" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">u8</label><label for="__tabbed_3_2">u16</label><label for="__tabbed_3_3">u32</label><label for="__tabbed_3_4">u64</label><label for="__tabbed_3_5">u128</label><label for="__tabbed_3_6">i8</label><label for="__tabbed_3_7">i16</label><label for="__tabbed_3_8">i32</label><label for="__tabbed_3_9">i64</label><label for="__tabbed_3_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">// u8::MAXに1をかけるとu8::MAXとなりオーバーフローは発生しないのでSome(u8::MAX)が返ります。</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="c1">// u8::MAXに2をかけるとu8::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u8</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">// u16::MAXに1をかけるとu16::MAXとなりオーバーフローは発生しないのでSome(u16::MAX)が返ります。</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="c1">// u16::MAXに2をかけるとu16::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u16</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1">// u32::MAXに1をかけるとu32::MAXとなりオーバーフローは発生しないのでSome(u32::MAX)が返ります。</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="c1">// u32::MAXに2をかけるとu32::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u32</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">// u64::MAXに1をかけるとu64::MAXとなりオーバーフローは発生しないのでSome(u64::MAX)が返ります。</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="c1">// u64::MAXに2をかけるとu64::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u64</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1">// u128::MAXに1をかけるとu128::MAXとなりオーバーフローは発生しないのでSome(u128::MAX)が返ります。</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="c1">// u128::MAXに2をかけるとu128::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">u128</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1">// i8::MAXに1をかけるとi8::MAXとなりオーバーフローは発生しないのでSome(i8::MAX)が返ります。</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="c1">// i8::MAXに2をかけるとi8::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1">// i16::MAXに1をかけるとi16::MAXとなりオーバーフローは発生しないのでSome(i16::MAX)が返ります。</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="c1">// i16::MAXに2をかけるとi16::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1">// i32::MAXに1をかけるとi32::MAXとなりオーバーフローは発生しないのでSome(i32::MAX)が返ります。</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="c1">// i32::MAXに2をかけるとi32::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="c1">// i64::MAXに1をかけるとi64::MAXとなりオーバーフローは発生しないのでSome(i64::MAX)が返ります。</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="c1">// i64::MAXに2をかけるとi64::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="c1">// i128::MAXに1をかけるとi128::MAXとなりオーバーフローは発生しないのでSome(i128::MAX)が返ります。</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="c1">// i128::MAXに2をかけるとi128::MAX * 2となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_mul</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_div</li>
+</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:10"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><input id="__tabbed_4_5" name="__tabbed_4" type="radio" /><input id="__tabbed_4_6" name="__tabbed_4" type="radio" /><input id="__tabbed_4_7" name="__tabbed_4" type="radio" /><input id="__tabbed_4_8" name="__tabbed_4" type="radio" /><input id="__tabbed_4_9" name="__tabbed_4" type="radio" /><input id="__tabbed_4_10" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">u8</label><label for="__tabbed_4_2">u16</label><label for="__tabbed_4_3">u32</label><label for="__tabbed_4_4">u64</label><label for="__tabbed_4_5">u128</label><label for="__tabbed_4_6">i8</label><label for="__tabbed_4_7">i16</label><label for="__tabbed_4_8">i32</label><label for="__tabbed_4_9">i64</label><label for="__tabbed_4_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1">// 128u8を2で割ると64となりオーバーフローは発生しないので64が返ります。</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">128</span><span class="k">u8</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">64</span><span class="k">u8</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">1</span><span class="k">u8</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="c1">// 128u16を2で割ると64となりオーバーフローは発生しないので64が返ります。</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">128</span><span class="k">u16</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">64</span><span class="k">u16</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">1</span><span class="k">u16</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1">// 128u32を2で割ると64となりオーバーフローは発生しないので64が返ります。</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">128</span><span class="k">u32</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">64</span><span class="k">u32</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">1</span><span class="k">u32</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="c1">// 128u64を2で割ると64となりオーバーフローは発生しないので64が返ります。</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">128</span><span class="k">u64</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">64</span><span class="k">u64</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">1</span><span class="k">u64</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="c1">// 128u128を2で割ると64となりオーバーフローは発生しないので64が返ります。</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">128</span><span class="kt">u128</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">64</span><span class="kt">u128</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="fm">assert_eq!</span><span class="p">(</span><span class="mi">1</span><span class="kt">u128</span><span class="p">.</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="c1">// i8::MAXを-1で割るとi8::MIN + 1となりオーバーフローは発生しないのでSome(i8::MIN + 1)が返ります。</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i8</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="c1">// i8::MINを-1で割るとi8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i8</span>::<span class="n">MIN</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="mi">1</span><span class="k">i8</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="c1">// i16::MAXを-1で割るとi16::MIN + 1となりオーバーフローは発生しないのでSome(i16::MIN + 1)が返ります。</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i16</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="c1">// i16::MINを-1で割るとi16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i16</span>::<span class="n">MIN</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="mi">1</span><span class="k">i16</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="c1">// i32::MAXを-1で割るとi32::MIN + 1となりオーバーフローは発生しないのでSome(i32::MIN + 1)が返ります。</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i32</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="c1">// i32::MINを-1で割るとi32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i32</span>::<span class="n">MIN</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="mi">1</span><span class="k">i32</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="c1">// i64::MAXを-1で割るとi64::MIN + 1となりオーバーフローは発生しないのでSome(i64::MIN + 1)が返ります。</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i64</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="c1">// i64::MINを-1で割るとi64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i64</span>::<span class="n">MIN</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="mi">1</span><span class="k">i64</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="c1">// i128::MAXを-1で割るとi128::MIN + 1となりオーバーフローは発生しないのでSome(i128::MIN + 1)が返ります。</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MAX</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="kt">i128</span>::<span class="n">MIN</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a><span class="c1">// i128::MINを-1で割るとi128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。</span>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="kt">i128</span>::<span class="n">MIN</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="c1">// 0での除算はNoneが返ります。</span>
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="fm">assert_eq!</span><span class="p">((</span><span class="mi">1</span><span class="kt">i128</span><span class="p">).</span><span class="n">checked_div</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="nb">None</span><span class="p">);</span><span class="w"></span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_div_euclid</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:10"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><input id="__tabbed_5_3" name="__tabbed_5" type="radio" /><input id="__tabbed_5_4" name="__tabbed_5" type="radio" /><input id="__tabbed_5_5" name="__tabbed_5" type="radio" /><input id="__tabbed_5_6" name="__tabbed_5" type="radio" /><input id="__tabbed_5_7" name="__tabbed_5" type="radio" /><input id="__tabbed_5_8" name="__tabbed_5" type="radio" /><input id="__tabbed_5_9" name="__tabbed_5" type="radio" /><input id="__tabbed_5_10" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">u8</label><label for="__tabbed_5_2">u16</label><label for="__tabbed_5_3">u32</label><label for="__tabbed_5_4">u64</label><label for="__tabbed_5_5">u128</label><label for="__tabbed_5_6">i8</label><label for="__tabbed_5_7">i16</label><label for="__tabbed_5_8">i32</label><label for="__tabbed_5_9">i64</label><label for="__tabbed_5_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_rem</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:10"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><input id="__tabbed_6_3" name="__tabbed_6" type="radio" /><input id="__tabbed_6_4" name="__tabbed_6" type="radio" /><input id="__tabbed_6_5" name="__tabbed_6" type="radio" /><input id="__tabbed_6_6" name="__tabbed_6" type="radio" /><input id="__tabbed_6_7" name="__tabbed_6" type="radio" /><input id="__tabbed_6_8" name="__tabbed_6" type="radio" /><input id="__tabbed_6_9" name="__tabbed_6" type="radio" /><input id="__tabbed_6_10" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">u8</label><label for="__tabbed_6_2">u16</label><label for="__tabbed_6_3">u32</label><label for="__tabbed_6_4">u64</label><label for="__tabbed_6_5">u128</label><label for="__tabbed_6_6">i8</label><label for="__tabbed_6_7">i16</label><label for="__tabbed_6_8">i32</label><label for="__tabbed_6_9">i64</label><label for="__tabbed_6_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_rem_euclid</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:10"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><input id="__tabbed_7_3" name="__tabbed_7" type="radio" /><input id="__tabbed_7_4" name="__tabbed_7" type="radio" /><input id="__tabbed_7_5" name="__tabbed_7" type="radio" /><input id="__tabbed_7_6" name="__tabbed_7" type="radio" /><input id="__tabbed_7_7" name="__tabbed_7" type="radio" /><input id="__tabbed_7_8" name="__tabbed_7" type="radio" /><input id="__tabbed_7_9" name="__tabbed_7" type="radio" /><input id="__tabbed_7_10" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">u8</label><label for="__tabbed_7_2">u16</label><label for="__tabbed_7_3">u32</label><label for="__tabbed_7_4">u64</label><label for="__tabbed_7_5">u128</label><label for="__tabbed_7_6">i8</label><label for="__tabbed_7_7">i16</label><label for="__tabbed_7_8">i32</label><label for="__tabbed_7_9">i64</label><label for="__tabbed_7_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_shl</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:10"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><input id="__tabbed_8_3" name="__tabbed_8" type="radio" /><input id="__tabbed_8_4" name="__tabbed_8" type="radio" /><input id="__tabbed_8_5" name="__tabbed_8" type="radio" /><input id="__tabbed_8_6" name="__tabbed_8" type="radio" /><input id="__tabbed_8_7" name="__tabbed_8" type="radio" /><input id="__tabbed_8_8" name="__tabbed_8" type="radio" /><input id="__tabbed_8_9" name="__tabbed_8" type="radio" /><input id="__tabbed_8_10" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">u8</label><label for="__tabbed_8_2">u16</label><label for="__tabbed_8_3">u32</label><label for="__tabbed_8_4">u64</label><label for="__tabbed_8_5">u128</label><label for="__tabbed_8_6">i8</label><label for="__tabbed_8_7">i16</label><label for="__tabbed_8_8">i32</label><label for="__tabbed_8_9">i64</label><label for="__tabbed_8_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_shr</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:10"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><input id="__tabbed_9_3" name="__tabbed_9" type="radio" /><input id="__tabbed_9_4" name="__tabbed_9" type="radio" /><input id="__tabbed_9_5" name="__tabbed_9" type="radio" /><input id="__tabbed_9_6" name="__tabbed_9" type="radio" /><input id="__tabbed_9_7" name="__tabbed_9" type="radio" /><input id="__tabbed_9_8" name="__tabbed_9" type="radio" /><input id="__tabbed_9_9" name="__tabbed_9" type="radio" /><input id="__tabbed_9_10" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">u8</label><label for="__tabbed_9_2">u16</label><label for="__tabbed_9_3">u32</label><label for="__tabbed_9_4">u64</label><label for="__tabbed_9_5">u128</label><label for="__tabbed_9_6">i8</label><label for="__tabbed_9_7">i16</label><label for="__tabbed_9_8">i32</label><label for="__tabbed_9_9">i64</label><label for="__tabbed_9_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_pow</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="10:10"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><input id="__tabbed_10_3" name="__tabbed_10" type="radio" /><input id="__tabbed_10_4" name="__tabbed_10" type="radio" /><input id="__tabbed_10_5" name="__tabbed_10" type="radio" /><input id="__tabbed_10_6" name="__tabbed_10" type="radio" /><input id="__tabbed_10_7" name="__tabbed_10" type="radio" /><input id="__tabbed_10_8" name="__tabbed_10" type="radio" /><input id="__tabbed_10_9" name="__tabbed_10" type="radio" /><input id="__tabbed_10_10" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">u8</label><label for="__tabbed_10_2">u16</label><label for="__tabbed_10_3">u32</label><label for="__tabbed_10_4">u64</label><label for="__tabbed_10_5">u128</label><label for="__tabbed_10_6">i8</label><label for="__tabbed_10_7">i16</label><label for="__tabbed_10_8">i32</label><label for="__tabbed_10_9">i64</label><label for="__tabbed_10_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> checked_neg</li>
+</ul>
+<p>TODO</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="11:10"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><input id="__tabbed_11_2" name="__tabbed_11" type="radio" /><input id="__tabbed_11_3" name="__tabbed_11" type="radio" /><input id="__tabbed_11_4" name="__tabbed_11" type="radio" /><input id="__tabbed_11_5" name="__tabbed_11" type="radio" /><input id="__tabbed_11_6" name="__tabbed_11" type="radio" /><input id="__tabbed_11_7" name="__tabbed_11" type="radio" /><input id="__tabbed_11_8" name="__tabbed_11" type="radio" /><input id="__tabbed_11_9" name="__tabbed_11" type="radio" /><input id="__tabbed_11_10" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">u8</label><label for="__tabbed_11_2">u16</label><label for="__tabbed_11_3">u32</label><label for="__tabbed_11_4">u64</label><label for="__tabbed_11_5">u128</label><label for="__tabbed_11_6">i8</label><label for="__tabbed_11_7">i16</label><label for="__tabbed_11_8">i32</label><label for="__tabbed_11_9">i64</label><label for="__tabbed_11_10">i128</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="_9">ラップ演算</h3>
+<p>TODO</p>
+<h3 id="_10">飽和演算</h3>
+<p>TODO</p>
+<h3 id="_11">オーバーフロー演算</h3>
+<p>TODO</p>
+<h2 id="_12">浮動小数点型</h2>
 <p>IEEE754規格準拠の単精度と倍精度の浮動小数点数をサポートしています。f32が単精度、f64が倍精度に対応しています。</p>
 <table>
 <thead>
@@ -664,17 +1368,17 @@
 </tr>
 </tbody>
 </table>
-<div class="highlight"><span class="filename">floating-point-type/main.rs</span><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;f32型の最小値:{:e}、最大値:{:e}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">MIN</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">MAX</span><span class="p">);</span><span class="w"></span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">NEG_INFINITY</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">INFINITY</span><span class="p">);</span><span class="w"></span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;f64型の最小値:{:e}、最大値:{:e}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">MIN</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">MAX</span><span class="p">);</span><span class="w"></span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">NEG_INFINITY</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">INFINITY</span><span class="p">);</span><span class="w"></span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="p">}</span><span class="w"></span>
+<div class="highlight"><span class="filename">floating-point-type/main.rs</span><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<a id="__codelineno-118-2" name="__codelineno-118-2" href="#__codelineno-118-2"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;f32型の最小値:{:e}、最大値:{:e}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">MIN</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">MAX</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-118-3" name="__codelineno-118-3" href="#__codelineno-118-3"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">NEG_INFINITY</span><span class="p">,</span><span class="w"> </span><span class="kt">f32</span>::<span class="n">INFINITY</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-118-4" name="__codelineno-118-4" href="#__codelineno-118-4"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;f64型の最小値:{:e}、最大値:{:e}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">MIN</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">MAX</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-118-5" name="__codelineno-118-5" href="#__codelineno-118-5"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{},{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">NEG_INFINITY</span><span class="p">,</span><span class="w"> </span><span class="kt">f64</span>::<span class="n">INFINITY</span><span class="p">);</span><span class="w"></span>
+<a id="__codelineno-118-6" name="__codelineno-118-6" href="#__codelineno-118-6"></a><span class="p">}</span><span class="w"></span>
 </code></pre></div>
-<div class="highlight"><span class="filename">実行結果</span><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>f32型の最小値:-3.4028235e38、最大値:3.4028235e38
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>-inf,inf
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>f64型の最小値:-1.7976931348623157e308、最大値:1.7976931348623157e308
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>-inf,inf
+<div class="highlight"><span class="filename">実行結果</span><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>f32型の最小値:-3.4028235e38、最大値:3.4028235e38
+<a id="__codelineno-119-2" name="__codelineno-119-2" href="#__codelineno-119-2"></a>-inf,inf
+<a id="__codelineno-119-3" name="__codelineno-119-3" href="#__codelineno-119-3"></a>f64型の最小値:-1.7976931348623157e308、最大値:1.7976931348623157e308
+<a id="__codelineno-119-4" name="__codelineno-119-4" href="#__codelineno-119-4"></a>-inf,inf
 </code></pre></div>
 
 
