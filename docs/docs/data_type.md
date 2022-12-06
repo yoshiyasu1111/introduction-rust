@@ -134,7 +134,7 @@ fn main() {
 
 演算した結果をOption型として返します。オーバーフローが発生しなければ演算結果をvとしてSome(v)を返し、発生すればNoneを返します。
 
-- checked_add
+- [x] checked_add
 
 === "u8"
 
@@ -226,11 +226,681 @@ fn main() {
     assert_eq!((i128::MAX - 1).checked_add(2), None);
     ```
 
+- [x] checked_sub
+
+=== "u8"
+
+    ```rust
+    // u8::MIN - 1から1を引くとu8::MINとなりオーバーフローは発生しないのでSome(u8::MIN)が返ります。
+    assert_eq!((u8::MIN + 1).checked_sub(1), Some(u8::MIN));
+    // u8::MIN - 1から2を引くとu8::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u8::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "u16"
+
+    ```rust
+    // u16::MIN - 1から1を引くとu16::MINとなりオーバーフローは発生しないのでSome(u16::MIN)が返ります。
+    assert_eq!((u16::MIN + 1).checked_sub(1), Some(u16::MIN));
+    // u16::MIN - 1から2を引くとu16::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u16::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "u32"
+
+    ```rust
+    // u32::MIN - 1から1を引くとu32::MINとなりオーバーフローは発生しないのでSome(u32::MIN)が返ります。
+    assert_eq!((u32::MIN + 1).checked_sub(1), Some(u32::MIN));
+    // u32::MIN - 1から2を引くとu32::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u32::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "u64"
+
+    ```rust
+    // u64::MIN - 1から1を引くとu64::MINとなりオーバーフローは発生しないのでSome(u64::MIN)が返ります。
+    assert_eq!((u64::MIN + 1).checked_sub(1), Some(u64::MIN));
+    // u64::MIN - 1から2を引くとu64::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u64::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "u128"
+
+    ```rust
+    // u128::MIN - 1から1を引くとu128::MINとなりオーバーフローは発生しないのでSome(u128::MIN)が返ります。
+    assert_eq!((u128::MIN + 1).checked_sub(1), Some(u128::MIN));
+    // u128::MIN - 1から2を引くとu128::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u128::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "i8"
+
+    ```rust
+    // i8::MIN - 1から1を引くとi8::MINとなりオーバーフローは発生しないのでSome(i8::MIN)が返ります。
+    assert_eq!((i8::MIN + 1).checked_sub(1), Some(i8::MIN));
+    // i8::MIN - 1から2を引くとi8::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i8::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "i16"
+
+    ```rust
+    // i16::MIN - 1から1を引くとi16::MINとなりオーバーフローは発生しないのでSome(i16::MIN)が返ります。
+    assert_eq!((i16::MIN + 1).checked_sub(1), Some(i16::MIN));
+    // i16::MIN - 1から2を引くとi16::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i16::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "i32"
+
+    ```rust
+    // i32::MIN - 1から1を引くとi32::MINとなりオーバーフローは発生しないのでSome(i32::MIN)が返ります。
+    assert_eq!((i32::MIN + 1).checked_sub(1), Some(i32::MIN));
+    // i32::MIN - 1から2を引くとi32::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i32::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "i64"
+
+    ```rust
+    // i64::MIN - 1から1を引くとi64::MINとなりオーバーフローは発生しないのでSome(i64::MIN)が返ります。
+    assert_eq!((i64::MIN + 1).checked_sub(1), Some(i64::MIN));
+    // i64::MIN - 1から2を引くとi64::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i64::MIN + 1).checked_sub(2), None);
+    ```
+
+=== "i128"
+
+    ```rust
+    // i128::MIN - 1から1を引くとi128::MINとなりオーバーフローは発生しないのでSome(i128::MIN)が返ります。
+    assert_eq!((i128::MIN + 1).checked_sub(1), Some(i128::MIN));
+    // i128::MIN - 1から2を引くとi128::MIN - 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i128::MIN + 1).checked_sub(2), None);
+    ```
+
+- [x] checked_mul
+
+=== "u8"
+
+    ```rust
+    // u8::MAXに1をかけるとu8::MAXとなりオーバーフローは発生しないのでSome(u8::MAX)が返ります。
+    assert_eq!((u8::MAX).checked_mul(1), Some(u8::MAX));
+    // u8::MAXに2をかけるとu8::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u8::MAX).checked_mul(2), None);
+    ```
+
+=== "u16"
+
+    ```rust
+    // u16::MAXに1をかけるとu16::MAXとなりオーバーフローは発生しないのでSome(u16::MAX)が返ります。
+    assert_eq!((u16::MAX).checked_mul(1), Some(u16::MAX));
+    // u16::MAXに2をかけるとu16::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u16::MAX).checked_mul(2), None);
+    ```
+
+=== "u32"
+
+    ```rust
+    // u32::MAXに1をかけるとu32::MAXとなりオーバーフローは発生しないのでSome(u32::MAX)が返ります。
+    assert_eq!((u32::MAX).checked_mul(1), Some(u32::MAX));
+    // u32::MAXに2をかけるとu32::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u32::MAX).checked_mul(2), None);
+    ```
+
+=== "u64"
+
+    ```rust
+    // u64::MAXに1をかけるとu64::MAXとなりオーバーフローは発生しないのでSome(u64::MAX)が返ります。
+    assert_eq!((u64::MAX).checked_mul(1), Some(u64::MAX));
+    // u64::MAXに2をかけるとu64::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u64::MAX).checked_mul(2), None);
+    ```
+
+=== "u128"
+
+    ```rust
+    // u128::MAXに1をかけるとu128::MAXとなりオーバーフローは発生しないのでSome(u128::MAX)が返ります。
+    assert_eq!((u128::MAX).checked_mul(1), Some(u128::MAX));
+    // u128::MAXに2をかけるとu128::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((u128::MAX).checked_mul(2), None);
+    ```
+
+=== "i8"
+
+    ```rust
+    // i8::MAXに1をかけるとi8::MAXとなりオーバーフローは発生しないのでSome(i8::MAX)が返ります。
+    assert_eq!((i8::MAX).checked_mul(1), Some(i8::MAX));
+    // i8::MAXに2をかけるとi8::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i8::MAX).checked_mul(2), None);
+    ```
+
+=== "i16"
+
+    ```rust
+    // i16::MAXに1をかけるとi16::MAXとなりオーバーフローは発生しないのでSome(i16::MAX)が返ります。
+    assert_eq!((i16::MAX).checked_mul(1), Some(i16::MAX));
+    // i16::MAXに2をかけるとi16::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i16::MAX).checked_mul(2), None);
+    ```
+
+=== "i32"
+
+    ```rust
+    // i32::MAXに1をかけるとi32::MAXとなりオーバーフローは発生しないのでSome(i32::MAX)が返ります。
+    assert_eq!((i32::MAX).checked_mul(1), Some(i32::MAX));
+    // i32::MAXに2をかけるとi32::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i32::MAX).checked_mul(2), None);
+    ```
+
+=== "i64"
+
+    ```rust
+    // i64::MAXに1をかけるとi64::MAXとなりオーバーフローは発生しないのでSome(i64::MAX)が返ります。
+    assert_eq!((i64::MAX).checked_mul(1), Some(i64::MAX));
+    // i64::MAXに2をかけるとi64::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i64::MAX).checked_mul(2), None);
+    ```
+
+=== "i128"
+
+    ```rust
+    // i128::MAXに1をかけるとi128::MAXとなりオーバーフローは発生しないのでSome(i128::MAX)が返ります。
+    assert_eq!((i128::MAX).checked_mul(1), Some(i128::MAX));
+    // i128::MAXに2をかけるとi128::MAX * 2となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i128::MAX).checked_mul(2), None);
+    ```
+
+- [x] checked_div
+
+=== "u8"
+
+    ```rust
+    // 128u8を2で割ると64となりオーバーフローは発生しないので64が返ります。
+    assert_eq!(128u8.checked_div(2), Some(64u8));
+    // 0での除算はNoneが返ります。
+    assert_eq!(1u8.checked_div(0), None);
+    ```
+
+=== "u16"
+
+    ```rust
+    // 128u16を2で割ると64となりオーバーフローは発生しないので64が返ります。
+    assert_eq!(128u16.checked_div(2), Some(64u16));
+    // 0での除算はNoneが返ります。
+    assert_eq!(1u16.checked_div(0), None);
+    ```
+
+=== "u32"
+
+    ```rust
+    // 128u32を2で割ると64となりオーバーフローは発生しないので64が返ります。
+    assert_eq!(128u32.checked_div(2), Some(64u32));
+    // 0での除算はNoneが返ります。
+    assert_eq!(1u32.checked_div(0), None);
+    ```
+
+=== "u64"
+
+    ```rust
+    // 128u64を2で割ると64となりオーバーフローは発生しないので64が返ります。
+    assert_eq!(128u64.checked_div(2), Some(64u64));
+    // 0での除算はNoneが返ります。
+    assert_eq!(1u64.checked_div(0), None);
+    ```
+
+=== "u128"
+
+    ```rust
+    // 128u128を2で割ると64となりオーバーフローは発生しないので64が返ります。
+    assert_eq!(128u128.checked_div(2), Some(64u128));
+    // 0での除算はNoneが返ります。
+    assert_eq!(1u128.checked_div(0), None);
+    ```
+
+=== "i8"
+
+    ```rust
+    // i8::MAXを-1で割るとi8::MIN + 1となりオーバーフローは発生しないのでSome(i8::MIN + 1)が返ります。
+    assert_eq!((i8::MAX).checked_div(-1), Some(i8::MIN + 1));
+    // i8::MINを-1で割るとi8::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i8::MIN).checked_div(-1), None);
+    // 0での除算はNoneが返ります。
+    assert_eq!((1i8).checked_div(0), None);
+    ```
+
+=== "i16"
+
+    ```rust
+    // i16::MAXを-1で割るとi16::MIN + 1となりオーバーフローは発生しないのでSome(i16::MIN + 1)が返ります。
+    assert_eq!((i16::MAX).checked_div(-1), Some(i16::MIN + 1));
+    // i16::MINを-1で割るとi16::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i16::MIN).checked_div(-1), None);
+    // 0での除算はNoneが返ります。
+    assert_eq!((1i16).checked_div(0), None);
+    ```
+
+=== "i32"
+
+    ```rust
+    // i32::MAXを-1で割るとi32::MIN + 1となりオーバーフローは発生しないのでSome(i32::MIN + 1)が返ります。
+    assert_eq!((i32::MAX).checked_div(-1), Some(i32::MIN + 1));
+    // i32::MINを-1で割るとi32::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i32::MIN).checked_div(-1), None);
+    // 0での除算はNoneが返ります。
+    assert_eq!((1i32).checked_div(0), None);
+    ```
+
+=== "i64"
+
+    ```rust
+    // i64::MAXを-1で割るとi64::MIN + 1となりオーバーフローは発生しないのでSome(i64::MIN + 1)が返ります。
+    assert_eq!((i64::MAX).checked_div(-1), Some(i64::MIN + 1));
+    // i64::MINを-1で割るとi64::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i64::MIN).checked_div(-1), None);
+    // 0での除算はNoneが返ります。
+    assert_eq!((1i64).checked_div(0), None);
+    ```
+
+=== "i128"
+
+    ```rust
+    // i128::MAXを-1で割るとi128::MIN + 1となりオーバーフローは発生しないのでSome(i128::MIN + 1)が返ります。
+    assert_eq!((i128::MAX).checked_div(-1), Some(i128::MIN + 1));
+    // i128::MINを-1で割るとi128::MAX + 1となりオーバーフローが発生するのでNoneが返ります。
+    assert_eq!((i128::MIN).checked_div(-1), None);
+    // 0での除算はNoneが返ります。
+    assert_eq!((1i128).checked_div(0), None);
+    ```
+
+- [x] checked_div_euclid
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_rem
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_rem_euclid
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_shl
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_shr
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_pow
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
+- [x] checked_neg
+
+TODO
+
+=== "u8"
+
+    ```rust
+    ```
+
+=== "u16"
+
+    ```rust
+    ```
+
+=== "u32"
+
+    ```rust
+    ```
+
+=== "u64"
+
+    ```rust
+    ```
+
+=== "u128"
+
+    ```rust
+    ```
+
+=== "i8"
+
+    ```rust
+    ```
+
+=== "i16"
+
+    ```rust
+    ```
+
+=== "i32"
+
+    ```rust
+    ```
+
+=== "i64"
+
+    ```rust
+    ```
+
+=== "i128"
+
+    ```rust
+    ```
+
 ### ラップ演算
+
+TODO
 
 ### 飽和演算
 
+TODO
+
 ### オーバーフロー演算
+
+TODO
 
 ## 浮動小数点型
 
