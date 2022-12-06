@@ -1,0 +1,12 @@
+{
+    "name": "rust",
+    "dockerComposeFile": [
+        "docker-compose.yml"
+    ],
+    "service": "rust",
+    "remoteUser": "rustuser",
+    "workspaceFolder": "/app",
+    "extensions": [
+        "rust-lang.rust-analyzer"
+    ]
+}
