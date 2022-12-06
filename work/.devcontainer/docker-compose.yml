@@ -1,0 +1,11 @@
+version: '3'
+services:
+
+  rust:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rust
+    volumes:
+      - ${PWD}:/app
+    tty: true
